@@ -3,6 +3,7 @@ let favorites = [];
 
 const premieres = document.querySelector('.premieres');
 
+// Fetching premieres
 const fetchPremieres = async() =>{
     try{
         let response = await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/premieres?year=2022&month=JANUARY', {
@@ -16,7 +17,7 @@ const fetchPremieres = async() =>{
         
         if (data.items) {
             const first10Movies = data.items.slice(0, 10);
-            console.log(first10Movies, "name");
+            // console.log(first10Movies, "name");
             first10Movies.forEach((movie)=>{
                     console.log("movie", movie)
 
@@ -34,14 +35,14 @@ const fetchPremieres = async() =>{
                 const heart = document.createElement('img');
                 heart.classList.add('heart');
                 heart.src = "./assets/whiteheart.png" 
-                
+            f    
                 heart.addEventListener('click', () => {
                     
                     if (heart.src.includes('whiteheart')) {
                      
                       heart.src = "./assets/redheart.png";
                       
-                      const currentMovie = { id: 1, title: 'Movie 1' };
+                      const currentMovie = { id: movie.filmId };
                       favorites.push(currentMovie);
                     } else {
                      
@@ -100,41 +101,42 @@ const fetchDigitalReleases = async() =>{
         if (data.releases) {
             const first10Movies = data.releases.slice(0, 10);
             console.log(first10Movies, "name");
+            
             first10Movies.forEach((movie)=>{
                     console.log("movie", movie)
 
                 const card = document.createElement('div');
-            card.classList.add('card');
+                card.classList.add('card');
             
-            const cardTop = document.createElement('div')
-            cardTop.classList.add('card-top');
-            cardTop.style.background = `url(${movie.posterUrlPreview})`;
-            
-            const rating = document.createElement("div");
-            rating.classList.add('rating');
-            rating.innerHTML = parseFloat(movie.rating.toFixed(1));
-            
-            const heart = document.createElement('img');
-            heart.classList.add('heart');
-            heart.src = "./assets/whiteheart.png" 
-            
-            const movieTitle= document.createElement('h4');
-            movieTitle.classList.add('movie-title');
-            movieTitle.innerHTML = movie.nameRu;
-            
-            const genre = document.createElement('p');
-            genre.classList.add('genre');
-            genre.innerHTML = movie.genres.map(genre => genre.genre);
-            console.log(movie.genre, "genre")
-            
-            cardTop.appendChild(rating);
-            cardTop.appendChild(heart);
-            
-            card.appendChild(cardTop);
-            card.appendChild(movieTitle);
-            card.appendChild(genre);
+                const cardTop = document.createElement('div')
+                cardTop.classList.add('card-top');
+                cardTop.style.background = `url(${movie.posterUrlPreview})`;
+                
+                const rating = document.createElement("div");
+                rating.classList.add('rating');
+                rating.innerHTML = parseFloat(movie.rating.toFixed(1));
+                
+                const heart = document.createElement('img');
+                heart.classList.add('heart');
+                heart.src = "./assets/whiteheart.png" 
+                
+                const movieTitle= document.createElement('h4');
+                movieTitle.classList.add('movie-title');
+                movieTitle.innerHTML = movie.nameRu;
+                
+                const genre = document.createElement('p');
+                genre.classList.add('genre');
+                genre.innerHTML = movie.genres.map(genre => genre.genre);
+                console.log(movie.genre, "genre")
+                
+                cardTop.appendChild(rating);
+                cardTop.appendChild(heart);
+                
+                card.appendChild(cardTop);
+                card.appendChild(movieTitle);
+                card.appendChild(genre);
 
-            digital.appendChild(card);
+                digital.appendChild(card);
             })
             
           } else {
