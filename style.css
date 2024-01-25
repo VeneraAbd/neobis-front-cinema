@@ -84,6 +84,9 @@ body{
    width: 35px;
    height: 35px;
    cursor: pointer;
+   -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
+
 }
 
 .movie-title{
